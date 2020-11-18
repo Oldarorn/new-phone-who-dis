@@ -16,9 +16,10 @@ import {
   faPlaneArrival,
   faPhoneAlt,
   faWonSign,
-  faStickyNote
+  faStickyNote,
+  faCar
 } from "@fortawesome/free-solid-svg-icons";
-import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faTwitter, faLyft } from "@fortawesome/free-brands-svg-icons";
 
 import ContactsIcon from "@material-ui/icons/Contacts";
 import SettingsIcon from "@material-ui/icons/Settings";
@@ -36,6 +37,7 @@ import { TwitterApp } from "../../../apps/twitter/components/TwitterApp";
 import { ExampleApp } from "../../../apps/example/components/ExampleApp";
 import { SelloutApp } from "../../../apps/sellout/components/SelloutApp";
 import { NotesApp } from "../../../apps/notes/NotesApp";
+import UberApp from "../../../apps/uber/components/UberApp";
 
 const appsState = atom({
   key: "apps",
@@ -121,6 +123,15 @@ const appsState = atom({
         color: common.white,
         path: "/notes",
         Route: () => <Route path="/notes" component={NotesApp}/>
+      },
+      {
+        id: "UBER",
+        nameLocale: "APPS_UBER",
+        icon: <FontAwesomeIcon icon={faLyft} size="sm" />,
+        backgroundColor: '#b887fc',
+        color: common.white,
+        path: "/uber",
+        Route: () => <Route path="/uber" component={UberApp} />
       },
       {
         id: "EXAMPLE",
