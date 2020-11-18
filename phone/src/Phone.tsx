@@ -21,6 +21,7 @@ import { useTwitterService } from "./apps/twitter/hooks/useTwitterService";
 import { useSelloutService } from "./apps/sellout/hooks/useSelloutService";
 import { useBankService } from './apps/bank/hooks/useBankService';
 import { useNotesService } from "./apps/notes/hooks/useNotesService";
+import { useUberService } from "./apps/uber/hooks/useUberService";
 
 //These events are just for testing. Comment it out before building.
 setTimeout(() => {
@@ -70,6 +71,32 @@ setTimeout(() => {
   )
 }, 1000)
 
+
+setTimeout(() => {
+  window.dispatchEvent(
+    new MessageEvent("message", {
+      data: {
+        app: 'UBER',
+        method: 'setDrivers',
+        data: [
+          {
+            id: 1,
+            name: 'Taso',
+            stars: 5,
+            status: "free"
+          },
+          {
+            id: 2,
+            name: 'Chip',
+            stars: 3,
+            status: "busy"
+          },
+        ]
+      }
+    })
+  )
+}, 1000)
+
 setTimeout(() => {
   new MessageEvent("messsage", {
     data: {
@@ -84,6 +111,7 @@ setTimeout(() => {
 }, 1000)
 
 setTimeout(() => {
+  window.dispatchEvent(
   new MessageEvent("messsage", {
     data: {
       app: "TWITTER",
@@ -94,7 +122,9 @@ setTimeout(() => {
       }
     }
   })
+  )
 }, 1000)
+
 
 setTimeout(() => {
   window.dispatchEvent(
@@ -233,6 +263,7 @@ function Phone() {
   useSelloutService();
   useBankService();
   useNotesService();
+  useUberService();
 
   if (visibility === false) {
     return null;
