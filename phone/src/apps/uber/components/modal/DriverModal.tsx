@@ -47,12 +47,17 @@ const DriverModal = () => {
           </div>
           <div className={classes.modalContent}>
             <div className={classes.actionSection}>
-              <Button className={classes.requestButton}>
+              {detail.status == 'free' ? (
+                <Button className={classes.requestButton}>
                 <h3>Request Driver</h3>
               </Button>
+              ) : (
+                <Button disabled className={classes.requestButton}>
+                <h3>Request Driver</h3>
+              </Button>
+              )}
             </div>
           </div>
-
         </div>
       </Slide>
     </Paper>
