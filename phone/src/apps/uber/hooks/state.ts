@@ -19,6 +19,6 @@ export const uberState = {
   }),
   userType: atom({
     key: 'uberUserType',
-    default: null
+    default: "user"
   })
 }
