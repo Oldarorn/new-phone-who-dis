@@ -1,25 +1,28 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ResourceManifestPlugin = require("./webpack.fxmanifest.plugin");
-const CopyPlugin = require('copy-webpack-plugin')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ResourceManifestPlugin = require('./webpack.fxmanifest.plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
-module.exports = require("./webpack.common")({
+module.exports = require('./webpack.common')({
   // Prod spec
-  mode: "production",
+  mode: 'production',
 
   // In production, we skip all hot-reloading stuff
-  entry: [path.join(process.cwd(), "src/index.tsx")],
+  entry: [path.join(process.cwd(), 'src/index.tsx')],
 
   // Copy static media folder to new build
   plugins: [
     new CopyPlugin({
       patterns: [
-        { from: path.resolve(process.cwd(), "public", "media"), to: path.join('..', 'html', 'media') }
-      ]
+        {
+          from: path.resolve(process.cwd(), 'public', 'media'),
+          to: path.join('..', 'html', 'media'),
+        },
+      ],
     }),
     // Minify to reduce bundle size for prod.
     new HtmlWebpackPlugin({
-      template: "public/index.html",
+      template: 'public/index.html',
       minify: {
         removeComments: true,
         collapseWhitespace: true,

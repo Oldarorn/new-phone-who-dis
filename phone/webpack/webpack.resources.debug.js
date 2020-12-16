@@ -1,7 +1,7 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ResourceManifestPlugin = require("./webpack.fxmanifest.plugin");
-const CopyPlugin = require('copy-webpack-plugin')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ResourceManifestPlugin = require('./webpack.fxmanifest.plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 // This webpack config was made for getting the debug
 // build process as smooth as possible. It concentrates
@@ -9,28 +9,28 @@ const CopyPlugin = require('copy-webpack-plugin')
 // 'react-devtools' into NUI.
 
 module.exports = {
-  mode: "development",
-  devtool: "inline-source-map",
+  mode: 'development',
+  devtool: 'inline-source-map',
   performance: {
     assetFilter: (assetFilename) =>
       !/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename),
   },
-  entry: [
-    "react-devtools",
-    path.join(process.cwd(), "src/index.tsx")
-  ],
+  entry: ['react-devtools', path.join(process.cwd(), 'src/index.tsx')],
   output: {
-    path: path.resolve(process.cwd(), "../resources/html"),
-    filename: "[name].js",
+    path: path.resolve(process.cwd(), '../resources/html'),
+    filename: '[name].js',
   },
   plugins: [
     new CopyPlugin({
       patterns: [
-        { from: path.resolve(process.cwd(), "public", "media"), to: path.join('..', 'html', 'media') }
-      ]
+        {
+          from: path.resolve(process.cwd(), 'public', 'media'),
+          to: path.join('..', 'html', 'media'),
+        },
+      ],
     }),
     new HtmlWebpackPlugin({
-      template: "public/index.html",
+      template: 'public/index.html',
       minify: {
         removeComments: false,
         collapseWhitespace: false,
@@ -47,15 +47,15 @@ module.exports = {
     new ResourceManifestPlugin(),
   ],
   resolve: {
-    modules: ["src", "node_modules"],
-    extensions: [".js", ".jsx", ".ts", ".tsx", ".react.js"],
+    modules: ['src', 'node_modules'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.react.js'],
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        enforce: "pre",
-        use: ["source-map-loader"],
+        enforce: 'pre',
+        use: ['source-map-loader'],
       },
       {
         // Preprocess our own .css files
@@ -63,17 +63,17 @@ module.exports = {
         // for a list of loaders, see https://webpack.js.org/loaders/#styling
         test: /\.css$/,
         exclude: /node_modules/,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
       {
         // Preprocess 3rd party .css files located in node_modules
         test: /\.css$/,
         include: /node_modules/,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(eot|otf|ttf|woff|woff2)$/,
-        use: "file-loader",
+        use: 'file-loader',
       },
       {
         test: /\.tsx?$/,
@@ -81,15 +81,16 @@ module.exports = {
           {
             loader: 'ts-loader',
             options: {
-              transpileOnly: true
+              transpileOnly: true,
             },
-          }
+          },
         ],
-      },{
+      },
+      {
         test: /\.svg$/,
         use: [
           {
-            loader: "svg-url-loader",
+            loader: 'svg-url-loader',
             options: {
               // Inline files smaller than 10 kB
               limit: 10 * 1024,
@@ -102,14 +103,14 @@ module.exports = {
         test: /\.(jpg|png|gif)$/,
         use: [
           {
-            loader: "url-loader",
+            loader: 'url-loader',
             options: {
               // Inline files smaller than 10 kB
               limit: 10 * 1024,
             },
           },
           {
-            loader: "image-webpack-loader",
+            loader: 'image-webpack-loader',
             options: {
               mozjpeg: {
                 enabled: false,
@@ -125,7 +126,7 @@ module.exports = {
                 optimizationLevel: 7,
               },
               pngquant: {
-                quality: "65-90",
+                quality: '65-90',
                 speed: 4,
               },
             },
@@ -134,12 +135,12 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        use: "html-loader",
+        use: 'html-loader',
       },
       {
         test: /\.(mp4|webm)$/,
         use: {
-          loader: "url-loader",
+          loader: 'url-loader',
           options: {
             limit: 10000,
           },
@@ -154,12 +155,12 @@ module.exports = {
             options: {
               DEBUG: true,
               version: 3,
-              "ifdef-verbose": true, // add this for verbose output
-              "ifdef-triple-slash": true, // add this to use double slash comment instead of default triple slash
+              'ifdef-verbose': true, // add this for verbose output
+              'ifdef-triple-slash': true, // add this to use double slash comment instead of default triple slash
             },
           },
         ],
       },
     ],
   },
-}
+};
