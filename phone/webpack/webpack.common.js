@@ -1,6 +1,8 @@
 const path = require("path");
 const webpack = require("webpack");
 
+// Common webpack that serves as a template with option
+// object passed
 module.exports = (options) => ({
   mode: options.mode,
   entry: options.entry,
@@ -10,6 +12,7 @@ module.exports = (options) => ({
   },
   module: {
     rules: [
+      // Tsx files are handled by ts-loader
       {
         test: /\.tsx?$/,
         use: [
@@ -22,6 +25,7 @@ module.exports = (options) => ({
         ],
         exclude: /node_modules/,
       },
+      // JSX files are handled by babel
       {
         test: /\.jsx?$/, // Transform all .js and .jsx files required somewhere with Babel
         exclude: /node_modules/,
@@ -43,10 +47,12 @@ module.exports = (options) => ({
         include: /node_modules/,
         use: ["style-loader", "css-loader"],
       },
+      // Font Handling
       {
         test: /\.(eot|otf|ttf|woff|woff2)$/,
         use: "file-loader",
       },
+      // SVG Handling
       {
         test: /\.svg$/,
         use: [
@@ -60,6 +66,7 @@ module.exports = (options) => ({
           },
         ],
       },
+      // General Image Handling
       {
         test: /\.(jpg|png|gif)$/,
         use: [
@@ -94,10 +101,12 @@ module.exports = (options) => ({
           },
         ],
       },
+      // HTML Handling
       {
         test: /\.html$/,
         use: "html-loader",
       },
+      // More misc file handling
       {
         test: /\.(mp4|webm)$/,
         use: {
@@ -107,6 +116,7 @@ module.exports = (options) => ({
           },
         },
       },
+      // #IFDEF Syntax transformation
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -128,8 +138,9 @@ module.exports = (options) => ({
     // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
     // inside your code for any environment checks; Terser will automatically
     // drop any unreachable code.
+    // I thought this was already being injected through webpacks 'mode' guess not.
     new webpack.EnvironmentPlugin({
-      NODE_ENV: "development",
+      NODE_ENV: options.mode,
     }),
   ]),
   resolve: {

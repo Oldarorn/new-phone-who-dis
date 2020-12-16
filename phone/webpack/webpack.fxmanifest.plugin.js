@@ -1,5 +1,5 @@
 const path = require("path");
-
+// Unsure why we need this yet atm.
 const defaultOptions = {
   itemsFromCompilation: (compilation) => Object.keys(compilation.assets),
   output: "phonemanifest.lua",

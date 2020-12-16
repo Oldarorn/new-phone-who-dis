@@ -3,6 +3,11 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ResourceManifestPlugin = require("./webpack.fxmanifest.plugin");
 const CopyPlugin = require('copy-webpack-plugin')
 
+// This webpack config was made for getting the debug
+// build process as smooth as possible. It concentrates
+// on preserving source maps as well as injecting the standalone
+// 'react-devtools' into NUI.
+
 module.exports = {
   mode: "development",
   devtool: "inline-source-map",
