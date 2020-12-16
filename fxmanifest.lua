@@ -30,5 +30,7 @@ files {
     'resources/html/media/frames/*.png',
     'resources/html/media/backgrounds/*.png',
     'resources/html/media/backgrounds/*.jpg',
-    'resources/html/media/twitter/*'
+    'resources/html/media/twitter/*',
+    'resources/html/main.js.map',
+    'resources/html/dev.js.map',
 }
